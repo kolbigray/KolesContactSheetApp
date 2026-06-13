@@ -1158,10 +1158,11 @@ async function renderPageToCanvas(pageRows, s, L_export, pgIdx, totalPages, DPI)
 
       // Image
       if (s.fitMode==='cover'&&!isNatural) {
-        const pAR=photo.nw/photo.nh, cAR=cellW/fH;
-        let sx=0,sy=0,sw=photo.nw,sh=photo.nh;
-        if (pAR>cAR) { sw=photo.nh*cAR; sx=(photo.nw-sw)/2; }
-        else          { sh=photo.nw/cAR; sy=(photo.nh-sh)/2; }
+        const iw=img.naturalWidth, ih=img.naturalHeight;
+        const pAR=iw/ih, cAR=cellW/fH;
+        let sx=0,sy=0,sw=iw,sh=ih;
+        if (pAR>cAR) { sw=ih*cAR; sx=(iw-sw)/2; }
+        else          { sh=iw/cAR; sy=(ih-sh)/2; }
         ctx.drawImage(img,sx,sy,sw,sh,x,y,cellW,fH);
       } else {
         ctx.drawImage(img,x,y,cellW,fH);
